@@ -1,10 +1,12 @@
 import { useEffect, useState, useMemo } from "react";
-import { getLeads, type Lead } from './services/api';
+import { getLeads, type Lead, type Opportunity } from './services/api';
 import { LeadsTable } from './features/leads/LeadsTable';
 import { LeadDetailPanel } from './features/leads/LeadDetailPanel';
+import { OpportunitiesTable } from './features/opportunities/OpportunitiesTable';
 
 function App() {
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState<string>('');
