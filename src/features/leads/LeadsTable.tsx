@@ -3,9 +3,10 @@ import type { Lead } from '../../services/api';
 interface LeadsTableProps {
   leads: Lead[];
   onSelectLead: (leadId: string) => void;
+  selectedLeadId: string | null;
 }
 
-export function LeadsTable({ leads, onSelectLead }: LeadsTableProps) {
+export function LeadsTable({ leads, onSelectLead, selectedLeadId }: LeadsTableProps) {
 
   const statusStyles = {
     New: 'bg-green-100 text-green-800',
@@ -38,7 +39,9 @@ export function LeadsTable({ leads, onSelectLead }: LeadsTableProps) {
             leads.map((lead) => (
               <tr 
                 key={lead.id} 
-                className="hover:bg-gray-50 cursor-pointer" 
+                className={`cursor-pointer ${
+                  selectedLeadId === lead.id ? 'bg-blue-50' : 'hover:bg-gray-50'
+                }`}
                 onClick={() => onSelectLead(lead.id)}
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
