@@ -28,12 +28,10 @@ function App() {
     console.log('Recalculando filtros, busca e ordenação...');
     let processedLeads = leads;
 
-    // 1. Filtra por status
     if (statusFilter !== 'All') {
       processedLeads = processedLeads.filter(lead => lead.status === statusFilter);
     }
 
-    // 2. Filtra pela busca
     if (searchTerm) {
       const searchLower = searchTerm.toLowerCase();
       processedLeads = processedLeads.filter(lead => 
@@ -42,7 +40,6 @@ function App() {
       );
     }
 
-    // 3. Ordena o resultado final por score (decrescente)
     return [...processedLeads].sort((a, b) => b.score - a.score);
   }, [leads, statusFilter, searchTerm]);
 
