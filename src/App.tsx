@@ -49,6 +49,14 @@ function App() {
     return leads.find(lead => lead.id === selectedLeadId) || null;
   }, [leads, selectedLeadId]);
 
+  const handleUpdateLead = (updatedLead: Lead) => {
+    setLeads(currentLeads => 
+      currentLeads.map(lead => 
+        lead.id === updatedLead.id ? updatedLead : lead
+      )
+    );
+  };
+
   if (isLoading) {
     return <div className="text-center p-8">Carregando leads...</div>;
   }
@@ -98,6 +106,7 @@ function App() {
         isOpen={selectedLeadId !== null}
         onClose={() => setSelectedLeadId(null)}
         lead={selectedLead}
+        onUpdate={handleUpdateLead}
       />
     </div>
   );
