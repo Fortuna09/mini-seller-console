@@ -8,6 +8,7 @@ function App() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [opportunities, setOpportunities] = useState<Opportunity[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
@@ -15,7 +16,6 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Carrega leads do localStorage ou do JSON
         const savedLeads = localStorage.getItem('leads');
         if (savedLeads) {
           setLeads(JSON.parse(savedLeads));
@@ -25,13 +25,15 @@ function App() {
           localStorage.setItem('leads', JSON.stringify(fetchedLeads));
         }
 
-        // Carrega oportunidades do localStorage
         const savedOpportunities = localStorage.getItem('opportunities');
         if (savedOpportunities) {
           setOpportunities(JSON.parse(savedOpportunities));
         }
-      } catch (error) {
-        console.error("Falha ao buscar os dados:", error);
+      } catch (error: unknown) {
+        const errorMessage = error instanceof Error 
+          ? error.message 
+          : "Falha ao carregar os dados. Por favor, tente recarregar a página.";
+        setError(errorMessage);
       } finally {
         setIsLoading(false);
       }
@@ -41,7 +43,6 @@ function App() {
   }, []);
 
   const filteredAndSortedLeads = useMemo(() => {
-    console.log('Recalculando filtros, busca e ordenação...');
     let processedLeads = leads;
 
     if (statusFilter !== 'All') {
@@ -69,21 +70,18 @@ function App() {
       const newLeads = currentLeads.map(lead => 
         lead.id === updatedLead.id ? updatedLead : lead
       );
-      // Salva a nova lista no localStorage
       localStorage.setItem('leads', JSON.stringify(newLeads));
       return newLeads;
     });
   };
 
   const handleConvertLead = (lead: Lead) => {
-    // Remove o lead da lista de leads
     setLeads(currentLeads => {
       const newLeads = currentLeads.filter(l => l.id !== lead.id);
       localStorage.setItem('leads', JSON.stringify(newLeads));
       return newLeads;
     });
 
-    // Cria uma nova oportunidade
     const newOpportunity: Opportunity = {
       id: lead.id,
       name: lead.name,
@@ -92,16 +90,27 @@ function App() {
       amount: undefined
     };
 
-    // Adiciona à lista de oportunidades
     setOpportunities(currentOpportunities => {
       const newOpportunities = [...currentOpportunities, newOpportunity];
       localStorage.setItem('opportunities', JSON.stringify(newOpportunities));
       return newOpportunities;
     });
 
-    // Fecha o painel de detalhes
     setSelectedLeadId(null);
   };
+
+  if (error) {
+    return (
+      <div className="text-center p-8">
+        <div className="inline-flex items-center px-4 py-2 rounded-md text-sm text-red-700 bg-red-100">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+          </svg>
+          {error}
+        </div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return <div className="text-center p-8">Carregando leads...</div>;
