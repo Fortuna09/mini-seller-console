@@ -5,6 +5,14 @@ interface LeadsTableProps {
 }
 
 export function LeadsTable({ leads }: LeadsTableProps) {
+
+  const statusStyles = {
+    New: 'bg-green-100 text-green-800',
+    Contacted: 'bg-blue-100 text-blue-800',
+    Qualified: 'bg-purple-100 text-purple-800',
+    Lost: 'bg-red-100 text-red-800',
+  };
+
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full bg-white shadow-md rounded-lg">
@@ -34,12 +42,7 @@ export function LeadsTable({ leads }: LeadsTableProps) {
                 {lead.company}
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                  ${lead.status === 'New' ? 'bg-green-100 text-green-800' : ''}
-                  ${lead.status === 'Contacted' ? 'bg-blue-100 text-blue-800' : ''}
-                  ${lead.status === 'Qualified' ? 'bg-purple-100 text-purple-800' : ''}
-                  ${lead.status === 'Lost' ? 'bg-red-100 text-red-800' : ''}
-                `}>
+                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[lead.status]}`}>
                   {lead.status}
                 </span>
               </td>
