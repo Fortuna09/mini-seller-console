@@ -18,16 +18,16 @@ export function OpportunitiesTable({ opportunities }: OpportunitiesTableProps) {
         <thead className="bg-gray-100">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Nome
+              Name
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Conta
+              Account
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Estágio
+              Stage
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Valor
+              Amount
             </th>
           </tr>
         </thead>
@@ -47,14 +47,14 @@ export function OpportunitiesTable({ opportunities }: OpportunitiesTableProps) {
                   </span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {opportunity.amount ? `R$ ${opportunity.amount.toLocaleString('pt-BR')}` : '-'}
+                  {opportunity.amount ? `$ ${opportunity.amount.toLocaleString('en-US')}` : '-'}
                 </td>
               </tr>
             ))
           ) : (
             <tr>
               <td colSpan={4} className="text-center py-8 text-gray-500">
-                Nenhuma oportunidade encontrada.
+                No opportunities found.
               </td>
             </tr>
           )}

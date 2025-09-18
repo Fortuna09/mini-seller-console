@@ -60,7 +60,7 @@ export function LeadsTable({ leads, onSelectLead }: LeadsTableProps) {
           ) : (
             <tr>
               <td colSpan={4} className="text-center py-8 text-gray-500">
-                Nenhum lead encontrado.
+                No leads found.
               </td>
             </tr>
           )}
