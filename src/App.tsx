@@ -6,24 +6,30 @@ import { LeadDetailPanel } from './features/leads/LeadDetailPanel';
 function App() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [statusFilter, setStatusFilter] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
 
   useEffect(() => {
-  const fetchLeads = async () => {
-    try {
-      const fetchedLeads = await getLeads();
-      setLeads(fetchedLeads);
-    } catch (error) {
-      console.error("Falha ao buscar os leads:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const fetchLeads = async () => {
+      try {
+        const savedLeads = localStorage.getItem('leads');
+        if (savedLeads) {
+          setLeads(JSON.parse(savedLeads));
+        } else {
+          const fetchedLeads = await getLeads();
+          setLeads(fetchedLeads);
+          localStorage.setItem('leads', JSON.stringify(fetchedLeads));
+        }
+      } catch (error) {
+        console.error("Falha ao buscar os leads:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  fetchLeads();
-}, []);
+    fetchLeads();
+  }, []);
 
   const filteredAndSortedLeads = useMemo(() => {
     console.log('Recalculando filtros, busca e ordenação...');
@@ -50,11 +56,13 @@ function App() {
   }, [leads, selectedLeadId]);
 
   const handleUpdateLead = (updatedLead: Lead) => {
-    setLeads(currentLeads => 
-      currentLeads.map(lead => 
+    setLeads(currentLeads => {
+      const newLeads = currentLeads.map(lead => 
         lead.id === updatedLead.id ? updatedLead : lead
-      )
-    );
+      );
+      localStorage.setItem('leads', JSON.stringify(newLeads));
+      return newLeads;
+    });
   };
 
   if (isLoading) {
