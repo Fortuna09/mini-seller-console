@@ -7,6 +7,7 @@ function App() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState<string>('All');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
   const fetchLeads = async () => {
@@ -23,14 +24,19 @@ function App() {
   fetchLeads();
 }, []);
 
-  const filteredLeads = useMemo(() => {
-    console.log('Recalculando o filtro...'); // Para vermos quando ele roda
+  const filteredLeads = useMemo(() => {    
+    const statusFiltered = statusFilter === 'All' 
+      ? leads 
+      : leads.filter(lead => lead.status === statusFilter);
 
-    if (statusFilter === 'All') {
-      return leads; // Se o filtro for 'All', retorna a lista original
-    }
-    return leads.filter(lead => lead.status === statusFilter);
-  }, [leads, statusFilter]); // Array de dependências
+    if (!searchTerm) return statusFiltered;
+    
+    const searchLower = searchTerm.toLowerCase();
+    return statusFiltered.filter(lead => 
+      lead.name.toLowerCase().includes(searchLower) ||
+      lead.company.toLowerCase().includes(searchLower)
+    );
+  }, [leads, statusFilter, searchTerm]);
 
   if (isLoading) {
     return <div className="text-center p-8">Carregando leads...</div>;
@@ -40,6 +46,20 @@ function App() {
     <div className="p-8">
       <h1 className="text-3xl font-bold text-blue-400 mb-6">Meus Leads</h1>
       
+      <div className="mb-4 max-w-xs">
+        <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">
+          Buscar por Nome ou Empresa
+        </label>
+        <input
+          type="text"
+          id="search"
+          className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Digite para buscar..."
+        />
+      </div>
+
       <div className="mb-4 max-w-xs">
         <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-1">
           Filtrar por Status
