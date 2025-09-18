@@ -1,0 +1,38 @@
+[
+  {
+    "id": "lead-01",
+    "name": "Elon Musk",
+    "company": "SpaceX",
+    "email": "elon@spacex.com",
+    "source": "LinkedIn",
+    "score": 95,
+    "status": "New"
+  },
+  {
+    "id": "lead-02",
+    "name": "Jeff Bezos",
+    "company": "Amazon",
+    "email": "jeff@amazon.com",
+    "source": "Website",
+    "score": 98,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-03",
+    "name": "Ada Lovelace",
+    "company": "Babbage, Inc.",
+    "email": "ada@babbage.inc",
+    "source": "Referral",
+    "score": 100,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-04",
+    "name": "Grace Hopper",
+    "company": "US Navy",
+    "email": "grace@navy.mil",
+    "source": "Event",
+    "score": 85,
+    "status": "New"
+  }
+]
