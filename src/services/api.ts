@@ -1,5 +1,13 @@
 import leadsData from '../data/leads.json';
 
+export type Opportunity = {
+  id: string;
+  name: string;
+  stage: 'Prospecting' | 'Proposal' | 'Closed-Won' | 'Closed-Lost';
+  amount?: number;
+  accountName: string;
+};
+
 export type Lead = {
   id: string;
   name: string;
