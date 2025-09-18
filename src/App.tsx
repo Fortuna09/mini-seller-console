@@ -13,8 +13,9 @@ function App() {
   const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchLeads = async () => {
+    const fetchData = async () => {
       try {
+        // Carrega leads do localStorage ou do JSON
         const savedLeads = localStorage.getItem('leads');
         if (savedLeads) {
           setLeads(JSON.parse(savedLeads));
@@ -23,14 +24,20 @@ function App() {
           setLeads(fetchedLeads);
           localStorage.setItem('leads', JSON.stringify(fetchedLeads));
         }
+
+        // Carrega oportunidades do localStorage
+        const savedOpportunities = localStorage.getItem('opportunities');
+        if (savedOpportunities) {
+          setOpportunities(JSON.parse(savedOpportunities));
+        }
       } catch (error) {
-        console.error("Falha ao buscar os leads:", error);
+        console.error("Falha ao buscar os dados:", error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    fetchLeads();
+    fetchData();
   }, []);
 
   const filteredAndSortedLeads = useMemo(() => {
