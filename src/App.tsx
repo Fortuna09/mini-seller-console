@@ -5,6 +5,9 @@ import { LeadDetailPanel } from './features/leads/LeadDetailPanel';
 import { OpportunitiesTable } from './features/opportunities/OpportunitiesTable';
 import { Pagination } from './components/Pagination';
 
+import scuderiaLogo from './assets/scuderia-logo.png';
+
+
 function App() {
   const ITEMS_PER_PAGE = 5;
   const statuses: Array<Lead['status'] | 'All'> = ['All', 'New', 'Contacted', 'Qualified', 'Lost'];
@@ -143,8 +146,13 @@ function App() {
     <div className="bg-background min-h-screen">
       <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-800">F1 Sponsors Panel</h1>
-          <p className="text-neutral-500 mt-1">Manage potential sponsors for Scuderia.</p>
+          <div className="flex items-center gap-x-4">
+            <img src={scuderiaLogo} alt="Scuderia Logo" className="h-12 w-12" />
+            <div>
+              <h1 className="text-3xl font-bold text-neutral-800">F1 Sponsors Panel</h1>
+              <p className="text-neutral-500 mt-1">Manage potential sponsors for Scuderia.</p>
+            </div>
+          </div>
         </div>
 
         <div className="bg-white p-6 shadow-sm">
