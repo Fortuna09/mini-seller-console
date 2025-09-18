@@ -7,9 +7,10 @@ interface LeadDetailPanelProps {
   isOpen: boolean;
   onClose: () => void;
   onUpdate: (lead: Lead) => void;
+  onConvert: (lead: Lead) => void;
 }
 
-export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate }: LeadDetailPanelProps) {
+export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: LeadDetailPanelProps) {
   const [editedEmail, setEditedEmail] = useState('');
   const [editedStatus, setEditedStatus] = useState<Lead['status']>('New');
   const [emailError, setEmailError] = useState('');
@@ -142,6 +143,13 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate }: LeadDetailP
                               className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
                               Cancelar
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => lead && onConvert(lead)}
+                              className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+                            >
+                              Converter em Oportunidade
                             </button>
                           </div>
                         </div>

@@ -69,9 +69,38 @@ function App() {
       const newLeads = currentLeads.map(lead => 
         lead.id === updatedLead.id ? updatedLead : lead
       );
+      // Salva a nova lista no localStorage
       localStorage.setItem('leads', JSON.stringify(newLeads));
       return newLeads;
     });
+  };
+
+  const handleConvertLead = (lead: Lead) => {
+    // Remove o lead da lista de leads
+    setLeads(currentLeads => {
+      const newLeads = currentLeads.filter(l => l.id !== lead.id);
+      localStorage.setItem('leads', JSON.stringify(newLeads));
+      return newLeads;
+    });
+
+    // Cria uma nova oportunidade
+    const newOpportunity: Opportunity = {
+      id: lead.id,
+      name: lead.name,
+      accountName: lead.company,
+      stage: 'Prospecting',
+      amount: undefined
+    };
+
+    // Adiciona à lista de oportunidades
+    setOpportunities(currentOpportunities => {
+      const newOpportunities = [...currentOpportunities, newOpportunity];
+      localStorage.setItem('opportunities', JSON.stringify(newOpportunities));
+      return newOpportunities;
+    });
+
+    // Fecha o painel de detalhes
+    setSelectedLeadId(null);
   };
 
   if (isLoading) {
@@ -124,7 +153,15 @@ function App() {
         onClose={() => setSelectedLeadId(null)}
         lead={selectedLead}
         onUpdate={handleUpdateLead}
+        onConvert={handleConvertLead}
       />
+
+      {opportunities.length > 0 && (
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold text-green-600 mb-6">Minhas Oportunidades</h2>
+          <OpportunitiesTable opportunities={opportunities} />
+        </div>
+      )}
     </div>
   );
 }
