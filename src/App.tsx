@@ -1,13 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
 import { getLeads, type Lead } from './services/api';
 import { LeadsTable } from './features/leads/LeadsTable';
+import { LeadDetailPanel } from './features/leads/LeadDetailPanel';
 
 function App() {
-
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [statusFilter, setStatusFilter] = useState<string>('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
 
   useEffect(() => {
   const fetchLeads = async () => {
@@ -83,7 +84,16 @@ function App() {
         </select>
       </div>
 
-      <LeadsTable leads={filteredAndSortedLeads} />
+      <LeadsTable 
+        leads={filteredAndSortedLeads} 
+        onSelectLead={setSelectedLeadId}
+      />
+
+      <LeadDetailPanel 
+        isOpen={selectedLeadId !== null}
+        onClose={() => setSelectedLeadId(null)}
+        lead={leads.find(lead => lead.id === selectedLeadId) || null}
+      />
     </div>
   );
 }

@@ -2,9 +2,10 @@ import type { Lead } from '../../services/api';
 
 interface LeadsTableProps {
   leads: Lead[];
+  onSelectLead: (leadId: string) => void;
 }
 
-export function LeadsTable({ leads }: LeadsTableProps) {
+export function LeadsTable({ leads, onSelectLead }: LeadsTableProps) {
 
   const statusStyles = {
     New: 'bg-green-100 text-green-800',
@@ -34,7 +35,11 @@ export function LeadsTable({ leads }: LeadsTableProps) {
         </thead>
         <tbody className="divide-y divide-gray-200">
           {leads.map((lead) => (
-            <tr key={lead.id} className="hover:bg-gray-50">
+            <tr 
+              key={lead.id} 
+              className="hover:bg-gray-50 cursor-pointer" 
+              onClick={() => onSelectLead(lead.id)}
+            >
               <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                 {lead.name}
               </td>
