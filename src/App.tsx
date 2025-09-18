@@ -44,6 +44,11 @@ function App() {
     return [...processedLeads].sort((a, b) => b.score - a.score);
   }, [leads, statusFilter, searchTerm]);
 
+  const selectedLead = useMemo(() => {
+    if (!selectedLeadId) return null;
+    return leads.find(lead => lead.id === selectedLeadId) || null;
+  }, [leads, selectedLeadId]);
+
   if (isLoading) {
     return <div className="text-center p-8">Carregando leads...</div>;
   }
@@ -92,7 +97,7 @@ function App() {
       <LeadDetailPanel 
         isOpen={selectedLeadId !== null}
         onClose={() => setSelectedLeadId(null)}
-        lead={leads.find(lead => lead.id === selectedLeadId) || null}
+        lead={selectedLead}
       />
     </div>
   );
