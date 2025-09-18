@@ -1,38 +1,227 @@
 [
   {
     "id": "lead-01",
-    "name": "Elon Musk",
-    "company": "SpaceX",
-    "email": "elon@spacex.com",
-    "source": "LinkedIn",
-    "score": 95,
-    "status": "New"
+    "name": "Emily White",
+    "company": "Petronas",
+    "email": "emily.white@petronas.com",
+    "source": "Event",
+    "score": 99,
+    "status": "Qualified"
   },
   {
     "id": "lead-02",
-    "name": "Jeff Bezos",
-    "company": "Amazon",
-    "email": "jeff@amazon.com",
-    "source": "Website",
+    "name": "Michael Brown",
+    "company": "Aramco",
+    "email": "michael.brown@aramco.com",
+    "source": "Referral",
     "score": 98,
-    "status": "Contacted"
+    "status": "Qualified"
   },
   {
     "id": "lead-03",
-    "name": "Ada Lovelace",
-    "company": "Babbage, Inc.",
-    "email": "ada@babbage.inc",
+    "name": "Jessica Davis",
+    "company": "Santander",
+    "email": "jessica.davis@santander.com",
+    "source": "LinkedIn",
+    "score": 95,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-04",
+    "name": "Chris Miller",
+    "company": "Pirelli",
+    "email": "chris.miller@pirelli.com",
+    "source": "Website",
+    "score": 92,
+    "status": "New"
+  },
+  {
+    "id": "lead-05",
+    "name": "Sarah Wilson",
+    "company": "Rolex",
+    "email": "sarah.wilson@rolex.com",
+    "source": "Event",
+    "score": 96,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-06",
+    "name": "David Moore",
+    "company": "Oracle",
+    "email": "david.moore@oracle.com",
+    "source": "LinkedIn",
+    "score": 97,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-07",
+    "name": "Jennifer Taylor",
+    "company": "AWS",
+    "email": "jennifer.taylor@aws.com",
     "source": "Referral",
     "score": 100,
     "status": "Qualified"
   },
   {
-    "id": "lead-04",
-    "name": "Grace Hopper",
-    "company": "US Navy",
-    "email": "grace@navy.mil",
+    "id": "lead-08",
+    "name": "James Anderson",
+    "company": "Heineken",
+    "email": "james.anderson@heineken.com",
     "source": "Event",
-    "score": 85,
+    "score": 88,
     "status": "New"
+  },
+  {
+    "id": "lead-09",
+    "name": "Patricia Thomas",
+    "company": "DHL",
+    "email": "patricia.thomas@dhl.com",
+    "source": "Website",
+    "score": 85,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-10",
+    "name": "Robert Jackson",
+    "company": "Crypto.com",
+    "email": "robert.jackson@crypto.com",
+    "source": "Cold Call",
+    "score": 70,
+    "status": "Lost"
+  },
+  {
+    "id": "lead-11",
+    "name": "Linda Martinez",
+    "company": "Salesforce",
+    "email": "linda.martinez@salesforce.com",
+    "source": "Website",
+    "score": 94,
+    "status": "New"
+  },
+  {
+    "id": "lead-12",
+    "name": "William Robinson",
+    "company": "Puma",
+    "email": "william.robinson@puma.com",
+    "source": "LinkedIn",
+    "score": 80,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-13",
+    "name": "Elizabeth Clark",
+    "company": "Zoom",
+    "email": "elizabeth.clark@zoom.us",
+    "source": "Website",
+    "score": 75,
+    "status": "New"
+  },
+  {
+    "id": "lead-14",
+    "name": "Richard Rodriguez",
+    "company": "McLaren Applied",
+    "email": "richard.rodriguez@mclarenapplied.com",
+    "source": "Referral",
+    "score": 100,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-15",
+    "name": "Susan Lewis",
+    "company": "Bybit",
+    "email": "susan.lewis@bybit.com",
+    "source": "Event",
+    "score": 65,
+    "status": "Lost"
+  },
+  {
+    "id": "lead-16",
+    "name": "Joseph Lee",
+    "company": "IWC Schaffhausen",
+    "email": "joseph.lee@iwc.com",
+    "source": "LinkedIn",
+    "score": 89,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-17",
+    "name": "Karen Walker",
+    "company": "Bose",
+    "email": "karen.walker@bose.com",
+    "source": "Website",
+    "score": 78,
+    "status": "New"
+  },
+  {
+    "id": "lead-18",
+    "name": "Thomas Hall",
+    "company": "Dell Technologies",
+    "email": "thomas.hall@dell.com",
+    "source": "Referral",
+    "score": 86,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-19",
+    "name": "Nancy Allen",
+    "company": "Castore",
+    "email": "nancy.allen@castore.com",
+    "source": "LinkedIn",
+    "score": 72,
+    "status": "New"
+  },
+  {
+    "id": "lead-20",
+    "name": "Charles Young",
+    "company": "Cisco",
+    "email": "charles.young@cisco.com",
+    "source": "Event",
+    "score": 88,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-21",
+    "name": "Lisa King",
+    "company": "Ray-Ban",
+    "email": "lisa.king@ray-ban.com",
+    "source": "Website",
+    "score": 81,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-22",
+    "name": "Steven Wright",
+    "company": "Shell",
+    "email": "steven.wright@shell.com",
+    "source": "Referral",
+    "score": 93,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-23",
+    "name": "Ashley Scott",
+    "company": "Etihad Airways",
+    "email": "ashley.scott@etihad.com",
+    "source": "Event",
+    "score": 84,
+    "status": "Contacted"
+  },
+  {
+    "id": "lead-24",
+    "name": "Kevin Green",
+    "company": "SAP",
+    "email": "kevin.green@sap.com",
+    "source": "LinkedIn",
+    "score": 90,
+    "status": "Qualified"
+  },
+  {
+    "id": "lead-25",
+    "name": "Amanda Adams",
+    "company": "Rich Energy",
+    "email": "amanda.adams@richenergy.com",
+    "source": "Cold Call",
+    "score": 10,
+    "status": "Lost"
   }
 ]

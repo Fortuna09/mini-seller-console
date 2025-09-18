@@ -3,8 +3,10 @@ import { getLeads, type Lead, type Opportunity } from './services/api';
 import { LeadsTable } from './features/leads/LeadsTable';
 import { LeadDetailPanel } from './features/leads/LeadDetailPanel';
 import { OpportunitiesTable } from './features/opportunities/OpportunitiesTable';
+import { Pagination } from './components/Pagination';
 
 function App() {
+  const ITEMS_PER_PAGE = 5;
   const statuses: Array<Lead['status'] | 'All'> = ['All', 'New', 'Contacted', 'Qualified', 'Lost'];
 
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -14,6 +16,8 @@ function App() {
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedLeadId, setSelectedLeadId] = useState<string | null>(null);
+  const [leadsCurrentPage, setLeadsCurrentPage] = useState(1);
+  const [opportunitiesCurrentPage, setOpportunitiesCurrentPage] = useState(1);
 
   const handleClearFilters = () => {
     setStatusFilter('All');
@@ -72,6 +76,18 @@ function App() {
     return leads.find(lead => lead.id === selectedLeadId) || null;
   }, [leads, selectedLeadId]);
 
+  const paginatedLeads = useMemo(() => {
+    const indexOfLastItem = leadsCurrentPage * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    return filteredAndSortedLeads.slice(indexOfFirstItem, indexOfLastItem);
+  }, [filteredAndSortedLeads, leadsCurrentPage]);
+
+  const paginatedOpportunities = useMemo(() => {
+    const indexOfLastItem = opportunitiesCurrentPage * ITEMS_PER_PAGE;
+    const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
+    return opportunities.slice(indexOfFirstItem, indexOfLastItem);
+  }, [opportunities, opportunitiesCurrentPage]);
+
   const handleUpdateLead = (updatedLead: Lead) => {
     setLeads(currentLeads => {
       const newLeads = currentLeads.map(lead =>
@@ -94,7 +110,7 @@ function App() {
       name: lead.name,
       accountName: lead.company,
       stage: 'Prospecting',
-      amount: lead.score * 100000
+      amount: lead.score * 10000
     };
 
     setOpportunities(currentOpportunities => {
@@ -108,7 +124,7 @@ function App() {
 
   if (error) {
     return (
-      <div className="text-center p-8">
+      <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="inline-flex items-center px-4 py-2 rounded-md text-sm text-red-700 bg-red-100">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
@@ -120,32 +136,32 @@ function App() {
   }
 
   if (isLoading) {
-    return <div className="text-center p-8">Loading leads...</div>;
+    return <div className="flex items-center justify-center min-h-screen bg-background text-neutral-600">Loading leads...</div>;
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="p-4 sm:p-8 max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Leads Dashboard</h1>
-          <p className="text-gray-500 mt-1">Manage your leads and opportunities in one place.</p>
+    <div className="bg-background min-h-screen">
+      <div className="p-4 sm:p-8 max-w-7xl mx-auto space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold text-neutral-800">F1 Sponsors Panel</h1>
+          <p className="text-neutral-500 mt-1">Manage potential sponsors for Scuderia.</p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="border-b border-gray-200 pb-5 sm:flex sm:items-center sm:justify-between">
-            <h2 className="text-2xl font-semibold leading-6 text-gray-800">My Leads</h2>
+        <div className="bg-white p-6 shadow-sm">
+          <div className="border-b border-neutral-200 pb-5 sm:flex sm:items-center sm:justify-between">
+            <h2 className="text-xl font-semibold leading-6 text-neutral-800">Initial Contacts (Leads)</h2>
             <div className="mt-3 sm:ml-4 sm:mt-0">
               <label htmlFor="search" className="sr-only">Search</label>
-              <div className="relative rounded-md shadow-sm">
+              <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                   </svg>
                 </div>
                 <input
                   type="text"
                   id="search"
-                  className="block w-full max-w-xs rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+                  className="block w-full max-w-xs rounded-md border-neutral-300 py-2 pl-10 text-neutral-900 placeholder:text-neutral-400 focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search name or company"
@@ -154,41 +170,48 @@ function App() {
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 py-4">
-            <span className="text-sm font-medium text-gray-600">Filter by status:</span>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 py-4">
+            <span className="text-sm font-medium text-neutral-600">Filter by status:</span>
             <div className="flex flex-wrap items-center gap-2">
               {statuses.map((status) => (
                 <button
                   key={status}
                   type="button"
                   onClick={() => setStatusFilter(status)}
-                  className={`rounded-full px-3 py-1 text-sm font-semibold transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
-                    statusFilter === status
-                      ? 'bg-blue-600 text-white shadow'
-                      : 'bg-gray-100 text-gray-800 hover:bg-gray-200'
-                  }`}
+                  className={`rounded-md px-3 py-1 text-sm font-medium transition-colors duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${statusFilter === status
+                    ? 'bg-primary text-white shadow-sm'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-50 border border-neutral-300'
+                    }`}
                 >
                   {status}
                 </button>
               ))}
             </div>
-            
+
             {(statusFilter !== 'All' || searchTerm) && (
               <button
                 type="button"
                 onClick={handleClearFilters}
-                className="ml-auto text-sm font-medium text-blue-600 hover:text-blue-800"
+                className="ml-auto text-sm font-medium text-primary hover:text-primary-hover"
               >
                 Clear Filters
               </button>
             )}
           </div>
 
-          <LeadsTable
-            leads={filteredAndSortedLeads}
-            onSelectLead={setSelectedLeadId}
-            selectedLeadId={selectedLeadId}
-          />
+          <div className="overflow-hidden border border-neutral-200 rounded-lg">
+            <LeadsTable
+              leads={paginatedLeads}
+              onSelectLead={setSelectedLeadId}
+              selectedLeadId={selectedLeadId}
+            />
+            <Pagination
+              currentPage={leadsCurrentPage}
+              totalItems={filteredAndSortedLeads.length}
+              itemsPerPage={ITEMS_PER_PAGE}
+              onPageChange={setLeadsCurrentPage}
+            />
+          </div>
         </div>
 
         <LeadDetailPanel
@@ -200,9 +223,18 @@ function App() {
         />
 
         {opportunities.length > 0 && (
-          <div className="mt-8 bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-6">My Opportunities</h2>
-            <OpportunitiesTable opportunities={opportunities} />
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-neutral-200/80">
+            <h2 className="text-xl font-semibold text-neutral-800 mb-6">Active Negotiations (Opportunities)</h2>
+
+            <div className="overflow-hidden border border-neutral-200 rounded-lg">
+              <OpportunitiesTable opportunities={paginatedOpportunities} />
+              <Pagination
+                currentPage={opportunitiesCurrentPage}
+                totalItems={opportunities.length}
+                itemsPerPage={ITEMS_PER_PAGE}
+                onPageChange={setOpportunitiesCurrentPage}
+              />
+            </div>
           </div>
         )}
       </div>
