@@ -32,24 +32,32 @@ export function OpportunitiesTable({ opportunities }: OpportunitiesTableProps) {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {opportunities.map((opportunity) => (
-            <tr key={opportunity.id} className="hover:bg-gray-50">
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {opportunity.name}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {opportunity.accountName}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${stageStyles[opportunity.stage]}`}>
-                  {opportunity.stage}
-                </span>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {opportunity.amount ? `R$ ${opportunity.amount.toLocaleString('pt-BR')}` : '-'}
+          {opportunities.length > 0 ? (
+            opportunities.map((opportunity) => (
+              <tr key={opportunity.id} className="hover:bg-gray-50">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {opportunity.name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {opportunity.accountName}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${stageStyles[opportunity.stage]}`}>
+                    {opportunity.stage}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {opportunity.amount ? `R$ ${opportunity.amount.toLocaleString('pt-BR')}` : '-'}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="text-center py-8 text-gray-500">
+                Nenhuma oportunidade encontrada.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

@@ -108,10 +108,10 @@ function App() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-blue-400 mb-6">Meus Leads</h1>
+    <div className="p-4 sm:p-8">
+      <h1 className="text-2xl sm:text-3xl font-bold text-blue-400 mb-6">Meus Leads</h1>
       
-      <div className="mb-4 max-w-xs">
+      <div className="mb-4 w-full sm:max-w-xs">
         <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">
           Buscar por Nome ou Empresa
         </label>
@@ -125,7 +125,7 @@ function App() {
         />
       </div>
 
-      <div className="mb-4 max-w-xs">
+      <div className="mb-4 w-full sm:max-w-xs">
         <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-1">
           Filtrar por Status
         </label>

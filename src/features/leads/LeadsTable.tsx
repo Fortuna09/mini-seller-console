@@ -34,28 +34,36 @@ export function LeadsTable({ leads, onSelectLead }: LeadsTableProps) {
           </tr>
         </thead>
         <tbody className="divide-y divide-gray-200">
-          {leads.map((lead) => (
-            <tr 
-              key={lead.id} 
-              className="hover:bg-gray-50 cursor-pointer" 
-              onClick={() => onSelectLead(lead.id)}
-            >
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {lead.name}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {lead.company}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[lead.status]}`}>
-                  {lead.status}
-                </span>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                {lead.score}
+          {leads.length > 0 ? (
+            leads.map((lead) => (
+              <tr 
+                key={lead.id} 
+                className="hover:bg-gray-50 cursor-pointer" 
+                onClick={() => onSelectLead(lead.id)}
+              >
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {lead.name}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {lead.company}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusStyles[lead.status]}`}>
+                    {lead.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                  {lead.score}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={4} className="text-center py-8 text-gray-500">
+                Nenhum lead encontrado.
               </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
