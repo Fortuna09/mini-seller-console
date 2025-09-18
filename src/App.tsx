@@ -24,18 +24,26 @@ function App() {
   fetchLeads();
 }, []);
 
-  const filteredLeads = useMemo(() => {    
-    const statusFiltered = statusFilter === 'All' 
-      ? leads 
-      : leads.filter(lead => lead.status === statusFilter);
+  const filteredAndSortedLeads = useMemo(() => {
+    console.log('Recalculando filtros, busca e ordenação...');
+    let processedLeads = leads;
 
-    if (!searchTerm) return statusFiltered;
-    
-    const searchLower = searchTerm.toLowerCase();
-    return statusFiltered.filter(lead => 
-      lead.name.toLowerCase().includes(searchLower) ||
-      lead.company.toLowerCase().includes(searchLower)
-    );
+    // 1. Filtra por status
+    if (statusFilter !== 'All') {
+      processedLeads = processedLeads.filter(lead => lead.status === statusFilter);
+    }
+
+    // 2. Filtra pela busca
+    if (searchTerm) {
+      const searchLower = searchTerm.toLowerCase();
+      processedLeads = processedLeads.filter(lead => 
+        lead.name.toLowerCase().includes(searchLower) ||
+        lead.company.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // 3. Ordena o resultado final por score (decrescente)
+    return [...processedLeads].sort((a, b) => b.score - a.score);
   }, [leads, statusFilter, searchTerm]);
 
   if (isLoading) {
@@ -78,7 +86,7 @@ function App() {
         </select>
       </div>
 
-      <LeadsTable leads={filteredLeads} />
+      <LeadsTable leads={filteredAndSortedLeads} />
     </div>
   );
 }
