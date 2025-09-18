@@ -109,10 +109,10 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: 
                               onChange={(e) => setEditedStatus(e.target.value as Lead['status'])}
                               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
                             >
-                              <option value="New">Novo</option>
-                              <option value="Contacted">Contatado</option>
-                              <option value="Qualified">Qualificado</option>
-                              <option value="Lost">Perdido</option>
+                              <option value="New">New</option>
+                              <option value="Contacted">Contacted</option>
+                              <option value="Qualified">Qualified</option>
+                              <option value="Lost">Lost</option>
                             </select>
                           </div>
                           <div>

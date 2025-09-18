@@ -32,7 +32,7 @@ function App() {
       } catch (error: unknown) {
         const errorMessage = error instanceof Error 
           ? error.message 
-          : "Falha ao carregar os dados. Por favor, tente recarregar a página.";
+          : "Failed to load data. Please try refreshing the page.";
         setError(errorMessage);
       } finally {
         setIsLoading(false);
@@ -113,16 +113,16 @@ function App() {
   }
 
   if (isLoading) {
-    return <div className="text-center p-8">Carregando leads...</div>;
+    return <div className="text-center p-8">Loading leads...</div>;
   }
 
   return (
     <div className="p-4 sm:p-8">
-      <h1 className="text-2xl sm:text-3xl font-bold text-blue-400 mb-6">Meus Leads</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold text-blue-400 mb-6">My Leads</h1>
       
       <div className="mb-4 w-full sm:max-w-xs">
         <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-1">
-          Buscar por Nome ou Empresa
+          Search by Name or Company
         </label>
         <input
           type="text"
@@ -130,7 +130,7 @@ function App() {
           className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Digite para buscar..."
+          placeholder="Type to search..."
         />
       </div>
 
@@ -144,11 +144,11 @@ function App() {
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         >
-          <option value="All">Todos</option>
-          <option value="New">Novo</option>
-          <option value="Contacted">Contatado</option>
-          <option value="Qualified">Qualificado</option>
-          <option value="Lost">Perdido</option>
+          <option value="All">All</option>
+          <option value="New">New</option>
+          <option value="Contacted">Contacted</option>
+          <option value="Qualified">Qualified</option>
+          <option value="Lost">Lost</option>
         </select>
       </div>
 
@@ -167,7 +167,7 @@ function App() {
 
       {opportunities.length > 0 && (
         <div className="mt-8">
-          <h2 className="text-2xl font-bold text-green-600 mb-6">Minhas Oportunidades</h2>
+          <h2 className="text-2xl font-bold text-green-600 mb-6">My Opportunities</h2>
           <OpportunitiesTable opportunities={opportunities} />
         </div>
       )}
