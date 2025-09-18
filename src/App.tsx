@@ -6,6 +6,7 @@ function App() {
 
   const [leads, setLeads] = useState<Lead[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState<string>('All');
 
   useEffect(() => {
   const fetchLeads = async () => {
@@ -29,7 +30,26 @@ function App() {
   return (
     <div className="p-8">
       <h1 className="text-3xl font-bold text-blue-400 mb-6">Meus Leads</h1>
-      <LeadsTable leads={leads} />
+      
+      <div className="mb-4 max-w-xs">
+        <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-1">
+          Filtrar por Status
+        </label>
+        <select
+          id="status-filter"
+          className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        >
+          <option value="All">Todos</option>
+          <option value="New">Novo</option>
+          <option value="Contacted">Contatado</option>
+          <option value="Qualified">Qualificado</option>
+          <option value="Lost">Perdido</option>
+        </select>
+      </div>
+
+      <LeadsTable leads={leads.filter(lead => statusFilter === 'All' || lead.status === statusFilter)} />
     </div>
   );
 }
