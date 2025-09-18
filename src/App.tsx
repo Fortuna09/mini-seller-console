@@ -136,7 +136,7 @@ function App() {
 
       <div className="mb-4 w-full sm:max-w-xs">
         <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mb-1">
-          Filtrar por Status
+          Filter by Status
         </label>
         <select
           id="status-filter"

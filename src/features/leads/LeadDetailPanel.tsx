@@ -84,7 +84,7 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: 
                       {lead ? (
                         <div className="space-y-4">
                           <div>
-                            <h3 className="text-sm font-medium text-gray-500">Empresa</h3>
+                            <h3 className="text-sm font-medium text-gray-500">Company</h3>
                             <p className="mt-1 text-sm text-gray-900">{lead.company}</p>
                           </div>
                           <div>
@@ -120,7 +120,7 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: 
                             <p className="mt-1 text-sm text-gray-900">{lead.score}</p>
                           </div>
                           <div>
-                            <h3 className="text-sm font-medium text-gray-500">Fonte</h3>
+                            <h3 className="text-sm font-medium text-gray-500">Source</h3>
                             <p className="mt-1 text-sm text-gray-900">{lead.source}</p>
                           </div>
                           <div className="mt-6 flex space-x-3">
@@ -129,7 +129,7 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: 
                               onClick={handleSave}
                               className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
-                              Salvar
+                              Save
                             </button>
                             <button
                               type="button"
@@ -142,14 +142,14 @@ export function LeadDetailPanel({ lead, isOpen, onClose, onUpdate, onConvert }: 
                               }}
                               className="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
-                              Cancelar
+                              Cancel
                             </button>
                             <button
                               type="button"
                               onClick={() => lead && onConvert(lead)}
                               className="inline-flex justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                             >
-                              Converter em Oportunidade
+                              Convert to Opportunity
                             </button>
                           </div>
                         </div>
