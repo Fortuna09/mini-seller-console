@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { getLeads, type Lead } from './services/api';
 import { LeadsTable } from './features/leads/LeadsTable';
 
@@ -22,6 +22,15 @@ function App() {
 
   fetchLeads();
 }, []);
+
+  const filteredLeads = useMemo(() => {
+    console.log('Recalculando o filtro...'); // Para vermos quando ele roda
+
+    if (statusFilter === 'All') {
+      return leads; // Se o filtro for 'All', retorna a lista original
+    }
+    return leads.filter(lead => lead.status === statusFilter);
+  }, [leads, statusFilter]); // Array de dependências
 
   if (isLoading) {
     return <div className="text-center p-8">Carregando leads...</div>;
@@ -49,7 +58,7 @@ function App() {
         </select>
       </div>
 
-      <LeadsTable leads={leads.filter(lead => statusFilter === 'All' || lead.status === statusFilter)} />
+      <LeadsTable leads={filteredLeads} />
     </div>
   );
 }
