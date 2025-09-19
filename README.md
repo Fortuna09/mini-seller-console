@@ -1,69 +1,57 @@
-# React + TypeScript + Vite
+# F1 Sponsors CRM - A Mini Seller Console
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight CRM dashboard built with React and Tailwind CSS to manage and convert sponsorship leads into active opportunities, themed for a Formula 1 team. This project was completed as a frontend development challenge.
 
-Currently, two official plugins are available:
+**[Live Demo Link](https://mini-seller-console.netlify.app/)**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![F1 Sponsors CRM Screenshot](/PREVIEW.gif)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## About The Project
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This application simulates a real-world sales funnel, starting from raw leads to qualified opportunities. It's a single-page application built from the ground up, focusing on a clean user interface, efficient state management, and a great developer experience. The entire application is fully responsive and persists data in the user's browser via `localStorage`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+-   **Lead Management:** View, filter, search, and sort a list of potential sponsors.
+-   **Slide-Over Detail Panel:** Click on any lead to open a detailed view without leaving the main page.
+-   **Inline Editing:** Edit a lead's status and email directly in the detail panel, with real-time email validation.
+-   **Lead Conversion:** Convert qualified leads into active opportunities, moving them to a separate opportunities table.
+-   **Data Persistence:** All leads and opportunities are saved in `localStorage`, so your data persists between sessions.
+-   **Pagination:** Both tables include pagination to handle larger datasets gracefully.
+-   **Responsive Design:** The layout is optimized for both desktop and mobile devices.
+-   **Rich UX States:** Includes loading, empty, and error states for a smooth user experience.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+-   **Framework:** React 18
+-   **Build Tool:** Vite
+-   **Language:** TypeScript
+-   **Styling:** Tailwind CSS
+-   **UI Components:** Headless UI for the slide-over panel
+-   **Deployment:** Netlify 
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Running Locally
+
+To get a local copy up and running, follow these simple steps.
+
+1.  **Clone the repository**
+    ```sh
+    git clone https://github.com/Fortuna09/mini-seller-console.git
+    ```
+2.  **Install NPM packages**
+    ```sh
+    npm install
+    ```
+3.  **Run the development server**
+    ```sh
+    npm run dev
+    ```
+    The application will be available at `http://localhost:5173` (or another available port).
+
+## Key Architectural Decisions
+
+-   **State Management:** State is centralized in the main `App.tsx` component, acting as a single source of truth. Props are passed down to child components, and state is updated via callback functions (`lifting state up`).
+-   **Performance:** The `useMemo` hook is used extensively to memoize expensive calculations like filtering, sorting, and searching. This ensures the UI remains fast and responsive, only re-calculating data when necessary dependencies change.
+-   **Styling System:** A semantic color palette was defined in `tailwind.config.js` (`primary`, `accent`, etc.) to allow for easy and consistent theming across the entire application. Style maps were used within components for conditional styling (e.g., status badges) to keep the JSX clean and maintainable.
