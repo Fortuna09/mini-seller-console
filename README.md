@@ -55,3 +55,5 @@ To get a local copy up and running, follow these simple steps.
 -   **State Management:** State is centralized in the main `App.tsx` component, acting as a single source of truth. Props are passed down to child components, and state is updated via callback functions (`lifting state up`).
 -   **Performance:** The `useMemo` hook is used extensively to memoize expensive calculations like filtering, sorting, and searching. This ensures the UI remains fast and responsive, only re-calculating data when necessary dependencies change.
 -   **Styling System:** A semantic color palette was defined in `tailwind.config.js` (`primary`, `accent`, etc.) to allow for easy and consistent theming across the entire application. Style maps were used within components for conditional styling (e.g., status badges) to keep the JSX clean and maintainable.
+
+.
