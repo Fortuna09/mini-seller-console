@@ -4,7 +4,7 @@ A lightweight CRM dashboard built with React and Tailwind CSS to manage and conv
 
 **[Live Demo Link](https://mini-seller-console.netlify.app/)**
 
-![F1 Sponsors CRM Screenshot](/PREVIEW.gif)
+![F1 Sponsors CRM Screenshot](/gif.gif)
 
 ---
 
