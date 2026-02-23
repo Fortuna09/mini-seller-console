@@ -5,10 +5,5 @@
     "tecnologia": "React + Vite, TypeScript, Tailwind CSS, Design Responsivo",
     "imagem": "/image.png",
     "gif": "/gif.gif",
-    "tags": [
-    "React",
-    "TypeScript",
-    "Dashboard",
-    "Front-end"
-  ]
-}
+    "tags": ["React", "TypeScript", "Dashboard", "Front-end"]
+  }
