@@ -1,9 +1,9 @@
 {
     "titulo": "F1 Sponsors CRM - A Mini Seller Console",
-    "objetivo": "construir um um painel de controle leve para gerenciar e qualificar contatos de vendas (Leads), convertendo-os em negociações ativas (Opportunities).",
-    "desafio": "O principal desafio foi arquitetar o gerenciamento de estado de forma centralizada e performática, garantir um fluxo de dados claro entre os componentes usando callbacks, e sincronizar o estado local do formulário de edição com os dados globais da aplicação.",
-    "tecnologia": "React + Vite, TypeScript, Tailwind CSS, Design Responsivo",
+    "objetivo": "Aumento da eficiência do time de vendas através de um painel ágil para qualificação e conversão de Leads corporativos em oportunidades de negócio.",
+    "desafio": "Arquitetar um gerenciamento global de estado altamente performático e escalável com React, assegurando o fluxo bidirecional de informações em tempo real e mantendo UX excelente em telas complexas de edição.",
+    "tecnologia": "React, Vite, TypeScript, Tailwind CSS",
     "imagem": "/image.png",
     "gif": "/gif.gif",
-    "tags": ["React", "TypeScript", "Dashboard", "Front-end"]
+    "tags": ["React", "TypeScript", "Tailwind CSS", "Front-end"]
   }
